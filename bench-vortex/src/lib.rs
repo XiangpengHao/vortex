@@ -22,7 +22,7 @@ use vortex_alp::ALPEncoding;
 use vortex_datetime_parts::DateTimePartsEncoding;
 use vortex_dict::DictEncoding;
 use vortex_dtype::DType;
-use vortex_fastlanes::{BitPackedEncoding, FoREncoding};
+use vortex_fastlanes::{BitPackedEncoding, DeltaEncoding, FoREncoding};
 use vortex_roaring::RoaringBoolEncoding;
 use vortex_runend::RunEndEncoding;
 use vortex_sampling_compressor::compressors::alp::ALPCompressor;
@@ -50,19 +50,11 @@ pub mod tpch;
 pub mod vortex_utils;
 
 lazy_static! {
-    pub static ref CTX: Arc<Context> = Arc::new(Context::default().with_encodings([
-        &ALPEncoding as EncodingRef,
-        &DictEncoding,
-        &BitPackedEncoding,
-        &FoREncoding,
-        &DateTimePartsEncoding,
-        // &DeltaEncoding,  Blows up the search space too much.
-        &RunEndEncoding,
-        &RoaringBoolEncoding,
-        // &RoaringIntEncoding,
-        // Doesn't offer anything more than FoR really
-        // &ZigZagEncoding,
-    ]));
+    pub static ref CTX: Arc<Context> = Arc::new(
+        Context::default()
+            .with_encodings(SamplingCompressor::default().used_encodings)
+            .with_encoding(&DeltaEncoding)
+    );
 }
 
 lazy_static! {

@@ -21,10 +21,11 @@ use vortex_datafusion::memory::VortexMemTableOptions;
 use vortex_datafusion::persistent::config::{VortexFile, VortexTableOptions};
 use vortex_datafusion::SessionContextExt;
 use vortex_dtype::DType;
+use vortex_fastlanes::DeltaEncoding;
 use vortex_sampling_compressor::SamplingCompressor;
 use vortex_serde::layouts::LayoutWriter;
 
-use crate::idempotent_async;
+use crate::{idempotent_async, CTX};
 
 pub mod dbgen;
 mod execute;
@@ -306,12 +307,6 @@ async fn register_vortex_file(
     })
     .await?;
 
-    let ctx = if enable_compression {
-        Arc::new(Context::default().with_encodings(SamplingCompressor::default().used_encodings()))
-    } else {
-        Arc::new(Context::default())
-    };
-
     let f = OpenOptions::new()
         .read(true)
         .write(true)
@@ -330,7 +325,7 @@ async fn register_vortex_file(
                 vtx_file.to_str().unwrap().to_string(),
                 file_size,
             )],
-            ctx,
+            CTX,
         ),
     )?;
 
