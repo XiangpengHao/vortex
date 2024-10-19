@@ -48,17 +48,17 @@ allocator-api2 = "0.2.16"
 anyhow = "1.0"
 arbitrary = "1.3.2"
 arrayref = "0.3.7"
-arrow = { version = "53.0.0", features = ["prettyprint"] }
-arrow-arith = "53.0.0"
-arrow-array = "53.0.0"
-arrow-buffer = "53.0.0"
-arrow-cast = "53.0.0"
-arrow-csv = "53.0.0"
-arrow-data = "53.0.0"
-arrow-ipc = "53.0.0"
-arrow-ord = "53.0.0"
-arrow-schema = "53.0.0"
-arrow-select = "53.0.0"
+arrow = { path = "../arrow-rs/arrow" }
+arrow-arith = { path = "../arrow-rs/arrow-arith" }
+arrow-array = { path = "../arrow-rs/arrow-array" }
+arrow-buffer = { path = "../arrow-rs/arrow-buffer" }
+arrow-cast = { path = "../arrow-rs/arrow-cast" }
+arrow-csv = { path = "../arrow-rs/arrow-csv" }
+arrow-data = { path = "../arrow-rs/arrow-data" }
+arrow-ipc = { path = "../arrow-rs/arrow-ipc" }
+arrow-ord = { path = "../arrow-rs/arrow-ord" }
+arrow-schema = { path = "../arrow-rs/arrow-schema" }
+arrow-select = { path = "../arrow-rs/arrow-select" }
 async-trait = "0.1"
 bindgen = "0.70.0"
 bytes = "1.6.0"
@@ -84,7 +84,7 @@ fastlanes = "0.1.5"
 flatbuffers = "24.3.25"
 flexbuffers = "2.0.0"
 fs_extra = "1.3.0"
-fsst-rs = "0.4.1"
+fsst-rs = { path = "../fsst" }
 futures = { version = "0.3.30", default-features = false }
 futures-executor = "0.3.30"
 futures-util = "0.3.30"
