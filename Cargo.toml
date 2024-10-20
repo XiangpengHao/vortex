@@ -6,7 +6,7 @@ members = [
     "pyvortex",
     "vortex-array",
     "vortex-buffer",
-    "vortex-datafusion",
+    # "vortex-datafusion",
     "vortex-datetime-dtype",
     "vortex-dtype",
     "vortex-error",
@@ -204,9 +204,9 @@ use_debug = "deny"
 
 [profile.release]
 codegen-units = 1
-lto = true # attempts to perform optimizations across all crates within the dependency graph
+lto = true        # attempts to perform optimizations across all crates within the dependency graph
 
 [profile.bench]
 codegen-units = 16 # default for "release", which "bench" inherits
-lto = false # default
+lto = false        # default
 debug = true
