@@ -1,5 +1,7 @@
 use std::fmt::{Debug, Display};
 
+use arrow_array::cast::AsArray;
+use arrow_array::types::ArrowDictionaryKeyType;
 use arrow_buffer::BooleanBuffer;
 use serde::{Deserialize, Serialize};
 use vortex::array::BoolArray;
@@ -60,6 +62,16 @@ impl DictArray {
         self.as_ref()
             .child(1, &DType::from(self.metadata().codes_ptype), self.len())
             .vortex_expect("DictArray is missing its codes child array")
+    }
+
+    pub fn into_arrow_dict<T: ArrowDictionaryKeyType>(
+        self,
+    ) -> VortexResult<arrow_array::DictionaryArray<T>> {
+        let keys = self.codes().into_canonical()?.into_arrow()?;
+
+        let keys = keys.as_primitive::<T>().clone();
+        let values = self.values().into_canonical()?.into_arrow()?;
+        unsafe { Ok(arrow_array::DictionaryArray::new_unchecked(keys, values)) }
     }
 }
 

@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "bench-vortex",
+    # "bench-vortex",
     "encodings/*",
     "fuzz",
     "pyvortex",
@@ -9,7 +9,7 @@ members = [
     # "vortex-datafusion",
     "vortex-datetime-dtype",
     "vortex-dtype",
-    "vortex-error",
+    # "vortex-error",
     "vortex-expr",
     "vortex-flatbuffers",
     "vortex-proto",
@@ -143,7 +143,7 @@ vortex-datetime-dtype = { version = "0.12.0", path = "./vortex-datetime-dtype" }
 vortex-datetime-parts = { version = "0.12.0", path = "./encodings/datetime-parts" }
 vortex-dict = { version = "0.12.0", path = "./encodings/dict" }
 vortex-dtype = { version = "0.12.0", path = "./vortex-dtype", default-features = false }
-vortex-error = { version = "0.12.0", path = "./vortex-error" }
+vortex-error = { version = "0.12.0", path = "./vortex-error", default-features = false }
 vortex-expr = { version = "0.12.0", path = "./vortex-expr" }
 vortex-fastlanes = { version = "0.12.0", path = "./encodings/fastlanes" }
 vortex-flatbuffers = { version = "0.12.0", path = "./vortex-flatbuffers" }
